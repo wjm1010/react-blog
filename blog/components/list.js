@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { List, Avatar } from 'antd'
-// import reqwest from 'reqwest'
+import axios from 'axios'
 
 const list = () => {
   const [list, setList] = useState(
@@ -53,7 +53,7 @@ const list = () => {
           <List.Item>
             <List.Item.Meta
               avatar={<Avatar src={item.avatar} />}
-              title={<a href="javascript:;">{item.title}</a>}
+              title={<a href="">{item.title}</a>}
               description={item.description} />
             {item.content}
           </List.Item>
@@ -63,4 +63,19 @@ const list = () => {
     </div>
   )
 }
+
+// list.getInitialProps = async ()=>{
+//   const promise = new Promise((resolve)=>{
+//     axios('http://127.0.0.1:7001/default/getArticleList').then(
+//       (res)=>{
+//         //console.log('远程获取数据结果:',res.data.data)
+//         resolve(res.data)
+//       }
+//     )
+//   })
+
+//   return await promise
+// }
+
+
 export default list

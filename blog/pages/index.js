@@ -6,6 +6,7 @@ import List from '../components/list'
 import Author from '../components/author'
 import Advert from '../components/advert'
 import Footer from '../components/footer'
+import axios from 'axios'
 const Home = () => {
   return (
     <div>
@@ -27,5 +28,15 @@ const Home = () => {
     </div>
   )
 }
+
+Home.getInitialProps = async () => {
+  const promise = new Promise(resolve => {
+    axios("http://rap2api.taobao.org/app/mock/data/1407237").then(res => {
+      console.log("远程数据结果：", res);
+      resolve(res.data);
+    });
+  });
+  return await promise;
+};
 
 export default Home
