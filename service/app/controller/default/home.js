@@ -13,6 +13,7 @@ class HomeController extends Controller {
 			'article.introduce as introduce,' +
 			'article.addTime as addTime,' +
 			'article.view_count as view_count ,' +
+			'article.avatar as avatar ,' +
 			'.type.typeName as typeName ' +
 			'FROM article LEFT JOIN type ON article.type_id = type.Id'
 
@@ -21,7 +22,6 @@ class HomeController extends Controller {
 		this.ctx.body = {
 			data: results
 		}
-		// this.ctx.body = 'api'
 	}
 }
 
