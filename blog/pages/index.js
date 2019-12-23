@@ -7,9 +7,9 @@ import Author from '../components/author'
 import Advert from '../components/advert'
 import Footer from '../components/footer'
 import axios from 'axios'
+import Config from '../config'
 const Home = (list) => {
-  console.log(list)
-  const [mylist, setMylist] = useState(list)
+  const [mylist, setMylist] = useState(list.data)
   return (
     <div>
       <Head>
@@ -18,12 +18,11 @@ const Home = (list) => {
       <Header />
       <Row className="comm-main" type="flex" justify="center">
         <Col className="comm-left" xs={24} sm={24} md={15} lg={17} xl={19}>
-          <List/>
+          <List content={mylist}/>
         </Col>
         <Col className="comm-right" xs={0} sm={0} md={8} lg={6} xl={4}>
           <Author />
           <Advert />
-
         </Col>
       </Row>
       <Footer />
@@ -33,10 +32,9 @@ const Home = (list) => {
 
 Home.getInitialProps = async () => {
   const promise = new Promise((resolve) => {
-    axios('http://127.0.0.1:7001/default/getArticleList').then(
+    axios(`${Config.url}default/getArticleList`).then(
       (res) => {
-        console.log('远程获取数据结果:', res.data.data)
-        resolve(res.data.data)
+        resolve(res.data)
       }
     )
   })
