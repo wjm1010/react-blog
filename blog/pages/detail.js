@@ -8,7 +8,6 @@ import Advert from '../components/advert'
 import Footer from '../components/footer'
 import Config from '../config'
 
-import MarkNav from 'markdown-navbar'
 import axios from 'axios'
 import marked from 'marked'
 import hljs from "highlight.js"
