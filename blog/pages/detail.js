@@ -6,7 +6,7 @@ import Header from '../components/header'
 import Author from '../components/author'
 import Advert from '../components/advert'
 import Footer from '../components/footer'
-import Config from '../config'
+import Api from '../config/api'
 
 import axios from 'axios'
 import marked from 'marked'
@@ -119,7 +119,7 @@ const detail = (props) => {
 detail.getInitialProps = async (context) => {
   let id = context.query.id
   const promise = new Promise((resolve) => {
-    axios(`${Config.url}default/getArticleById/${id}`).then(
+    axios(`${Api.getArticleById}/${id}`).then(
       (res) => {
         resolve(res.data.data[0])
       }

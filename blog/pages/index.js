@@ -7,8 +7,7 @@ import Author from '../components/author'
 import Advert from '../components/advert'
 import Footer from '../components/footer'
 import axios from 'axios'
-import Config from '../config'
-
+import Api from '../config/api'
 const Home = (list) => {
   const [mylist, setMylist] = useState(list.data)
   return (
@@ -33,7 +32,7 @@ const Home = (list) => {
 
 Home.getInitialProps = async () => {
   const promise = new Promise((resolve) => {
-    axios(`${Config.url}default/getArticleList`).then(
+    axios(Api.getArticleList).then(
       (res) => {
         resolve(res.data)
       }
