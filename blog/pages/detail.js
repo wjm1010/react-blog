@@ -155,12 +155,11 @@ const detail = () => {
 }
 
 detail.getInitialProps = async (context) => {
-  console.log(context.query.id)
   let id = context.query.id
   const promise = new Promise((resolve) => {
     axios(`${Config.url}default/getArticleById/${id}`).then(
       (res) => {
-        console.log(title)
+        console.log(res.data.data[0])
         resolve(res.data.data[0])
       }
     )
