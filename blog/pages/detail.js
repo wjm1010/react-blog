@@ -7,7 +7,8 @@ import Advert from '../components/advert'
 import Footer from '../components/footer'
 import MarkNav from 'markdown-navbar'
 import ReactMarkdown from 'react-markdown'
-
+import axios from 'axios'
+import Config from '../config'
 
 const detail = () => {
   let markdown = '# P01: react1\n' +
@@ -151,6 +152,21 @@ const detail = () => {
       </style>
     </>
   )
+}
+
+detail.getInitialProps = async (context) => {
+  console.log(context.query.id)
+  let id = context.query.id
+  const promise = new Promise((resolve) => {
+    axios(`${Config.url}default/getArticleById/${id}`).then(
+      (res) => {
+        console.log(title)
+        resolve(res.data.data[0])
+      }
+    )
+  })
+
+  return await promise
 }
 
 export default detail

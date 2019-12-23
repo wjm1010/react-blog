@@ -8,6 +8,7 @@ import Advert from '../components/advert'
 import Footer from '../components/footer'
 import axios from 'axios'
 import Config from '../config'
+
 const Home = (list) => {
   const [mylist, setMylist] = useState(list.data)
   return (

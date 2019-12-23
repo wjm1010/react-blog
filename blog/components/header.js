@@ -8,7 +8,7 @@ const header = () => (
     <Row type="flex" justify="center">
       <Col xs={24} sm={24} md={10} lg={10} xl={10}>
         <span className="header-logo">hello</span>
-        <span className="header-text">小明的资料</span>
+        <span className="header-text">Ant Design</span>
       </Col>
       <Col className="menu-div" xs={0} sm={0} md={14} lg={8} xl={6}>
         <Menu mode="horizontal">
