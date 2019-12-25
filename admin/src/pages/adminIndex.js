@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Layout, Menu, Breadcrumb, Icon } from 'antd'
-import { Route, Link } from "react-router-dom"
+import { Route } from "react-router-dom"
 import AddArticle from './addArticle'
 import ArticleList from './articleList'
 
@@ -41,9 +41,7 @@ const AdminIndex = (props) => {
 								<span>文章管理</span>
 							</span>
 						}>
-						<Menu.Item key="addArticle">
-							<Link to="/index/add">添加文章</Link>
-						</Menu.Item>
+						<Menu.Item key="addArticle">添加文章</Menu.Item>
 						<Menu.Item key="articleList">文章列表</Menu.Item>
 					</SubMenu>
 					<Menu.Item key="9">
