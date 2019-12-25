@@ -1,15 +1,23 @@
 import React, { useState } from 'react'
 import { Layout, Menu, Breadcrumb, Icon } from 'antd'
-import { Route } from "react-router-dom"
+import { Route, Link } from "react-router-dom"
 import AddArticle from './addArticle'
+import ArticleList from './articleList'
 
 const { Header, Content, Footer, Sider } = Layout
 const { SubMenu } = Menu
 
-const AdminIndex = () => {
+const AdminIndex = (props) => {
 	const [collapsed, setCollapsed] = useState(false)
 	const onCollapse = collapsed => {
 		setCollapsed(collapsed)
+	}
+	const handleClickArticle = (e) => {
+		if (e.key === 'addArticle') {
+			props.history.push('/index/add')
+		} else {
+			props.history.push('/index/list')
+		}
 	}
 	return (
 		<Layout style={{ minHeight: '100vh' }}>
@@ -26,15 +34,17 @@ const AdminIndex = () => {
 					</Menu.Item>
 					<SubMenu
 						key="sub1"
+						onClick={handleClickArticle}
 						title={
 							<span>
-								<Icon type="user" />
+								<Icon type="desktop" />
 								<span>文章管理</span>
 							</span>
-						}
-					>
-						<Menu.Item key="3">添加文章</Menu.Item>
-						<Menu.Item key="4">文章列表</Menu.Item>
+						}>
+						<Menu.Item key="addArticle">
+							<Link to="/index/add">添加文章</Link>
+						</Menu.Item>
+						<Menu.Item key="articleList">文章列表</Menu.Item>
 					</SubMenu>
 					<Menu.Item key="9">
 						<Icon type="file" />
@@ -49,8 +59,11 @@ const AdminIndex = () => {
 						<Breadcrumb.Item>后台管理</Breadcrumb.Item>
 						<Breadcrumb.Item>工作台</Breadcrumb.Item>
 					</Breadcrumb>
-					<div style={{ padding: 24, background: '#fff', minHeight: 360 }}>
-						<Route path="/index" exact component={AddArticle} />
+					<div style={{ padding: 24, background: '#fff', minHeight: 300 }}>
+						<Route path="/index/" exact component={AddArticle} />
+						<Route path="/index/add/" exact component={AddArticle} />
+						<Route path="/index/add/:id" exact component={AddArticle} />
+						<Route path="/index/list/" component={ArticleList} />
 					</div>
 				</Content>
 				<Footer style={{ textAlign: 'center' }}>Ant Design ©2020 Created by Ant UED</Footer>
