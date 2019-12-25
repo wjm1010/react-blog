@@ -3,7 +3,6 @@
 const Controller = require('egg').Controller
 
 class MainController extends Controller {
-
 	// 登录
 	async checkLogin() {
 		let userName = this.ctx.request.body.userName
