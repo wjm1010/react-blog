@@ -6,11 +6,19 @@ import { Row, Col, Input, Select, Button, DatePicker } from 'antd'
 const { Option } = Select
 const { TextArea } = Input
 
-const addArticle = () => {
-	const [collapsed, setCollapsed] = useState(false)
-	const renderer = new marked.Renderer()
+const AddArticle = () => {
+	const [articleId, setArticleId] = useState(0)  // 文章的ID，如果是0说明是新增加，如果不是0，说明是修改
+	const [articleTitle, setArticleTitle] = useState('')   //文章标题
+	const [articleContent, setArticleContent] = useState('')  //markdown的编辑内容
+	const [markdownContent, setMarkdownContent] = useState('预览内容') //html内容
+	const [introducemd, setIntroducemd] = useState()            //简介的markdown内容
+	const [introducehtml, setIntroducehtml] = useState('等待编辑') //简介的html内容
+	const [showDate, setShowDate] = useState()   //发布日期
+	const [updateDate, setUpdateDate] = useState() //修改日志的日期
+	const [typeInfo, setTypeInfo] = useState([]) // 文章类别信息
+	const [selectedType, setSelectType] = useState(1) //选择的文章类别
 	marked.setOptions({
-		renderer: renderer,
+		renderer: new marked.Renderer(),
 		gfm: true,
 		pedantic: false,
 		sanitize: false,
@@ -19,6 +27,17 @@ const addArticle = () => {
 		smartLists: true,
 		smartypants: false
 	})
+	const changeContent = (e) => {
+		setArticleContent(e.target.value)
+		let html = marked(e.target.value)
+		setMarkdownContent(html)
+	}
+
+	const changeIntroduce = (e) => {
+		setIntroducemd(e.target.value)
+		let html = marked(e.target.value)
+		setIntroducehtml(html)
+	}
 	return (
 		<div>
 			<Row gutter={5}>
@@ -40,13 +59,16 @@ const addArticle = () => {
 					<Row gutter={10} >
 						<Col span={12}>
 							<TextArea
+								value={articleContent}
 								className="markdown-content"
 								rows={35}
+								onChange={changeContent}
+								onPressEnter={changeContent}
 								placeholder="文章内容"
 							/>
 						</Col>
 						<Col span={12}>
-							<div className="show-html"></div>
+							<div className="show-html" dangerouslySetInnerHTML={{ __html: markdownContent }}></div>
 						</Col>
 					</Row>
 				</Col>
@@ -63,12 +85,16 @@ const addArticle = () => {
 						<br />
 						<TextArea
 							rows={4}
+							value={introducemd}
+							onChange={changeIntroduce}
+							onPressEnter={changeIntroduce}
 							placeholder="文章简介"
 						/><br /><br />
-						<div className="introduce-html">
-
+						<div
+							className="introduce-html"
+							dangerouslySetInnerHTML={{ __html: '文章简介：' + introducehtml }} >
 						</div>
-					</Col>
+					</Col><br />
 					<Col span={12}>
 						<div className="date-select">
 							<DatePicker
@@ -84,4 +110,4 @@ const addArticle = () => {
 	)
 }
 
-export default addArticle
+export default AddArticle
