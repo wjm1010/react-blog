@@ -3,9 +3,8 @@
 const Controller = require('egg').Controller
 
 class MainController extends Controller {
-	async index() {
-		this.ctx.body = 'api'
-	}
+
+	// 登录
 	async checkLogin() {
 		let userName = this.ctx.request.body.userName
 		let passWord = this.ctx.request.body.passWord
@@ -23,6 +22,11 @@ class MainController extends Controller {
 		}
 	}
 
+	//后台文章分类信息
+	async getTypeInfo() {
+		const results = await this.app.mysql.select('type')
+		this.ctx.body = { data: results }
+	}
 }
 
 module.exports = MainController
