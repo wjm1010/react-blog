@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 import { Layout, Menu, Breadcrumb, Icon } from 'antd'
+import { Route } from "react-router-dom"
+import AddArticle from './addArticle'
 
 const { Header, Content, Footer, Sider } = Layout
 const { SubMenu } = Menu
@@ -47,7 +49,9 @@ const AdminIndex = () => {
 						<Breadcrumb.Item>后台管理</Breadcrumb.Item>
 						<Breadcrumb.Item>工作台</Breadcrumb.Item>
 					</Breadcrumb>
-					<div style={{ padding: 24, background: '#fff', minHeight: 360 }}> 博客工作台 </div>
+					<div style={{ padding: 24, background: '#fff', minHeight: 360 }}>
+						<Route path="/index" exact component={AddArticle} />
+					</div>
 				</Content>
 				<Footer style={{ textAlign: 'center' }}>Ant Design ©2020 Created by Ant UED</Footer>
 			</Layout>
