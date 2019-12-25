@@ -84,24 +84,34 @@ const AddArticle = (props) => {
 		dataProps.addTime = (new Date(datetext).getTime()) / 1000
 
 		if (articleId === 0) {
-			console.log('articleId=:' + articleId)
 			dataProps.view_count = Math.ceil(Math.random() * 100) + 1000
 			axios({
 				method: 'post',
 				url: Api.addArticle,
 				data: dataProps,
 				withCredentials: true
-			}).then(
-				res => {
-					setArticleId(res.data.insertId)
-					if (res.data.isScuccess) {
-						message.success('文章保存成功')
-					} else {
-						message.error('文章保存失败')
-					}
-
+			}).then(res => {
+				setArticleId(res.data.insertId)
+				if (res.data.isScuccess) {
+					message.success('文章保存成功')
+				} else {
+					message.error('文章保存失败')
 				}
-			)
+			})
+		} else {
+			dataProps.id = articleId
+			axios({
+				method: 'post',
+				url: Api.updateArticle,
+				data: dataProps,
+				withCredentials: true
+			}).then(res => {
+				if (res.data.isScuccess) {
+					message.success('文章保存成功')
+				} else {
+					message.error('保存失败');
+				}
+			})
 		}
 	}
 	return (
@@ -140,7 +150,7 @@ const AddArticle = (props) => {
 							/>
 						</Col>
 						<Col span={12}>
-							<div className="show-html" dangerouslySetInnerHTML={{ __html: markdownContent }}></div>
+							<div className="show-html" dangerouslySetInnerHTML={{ __html: introducehtml }}></div>
 						</Col>
 					</Row>
 				</Col>
@@ -164,7 +174,7 @@ const AddArticle = (props) => {
 						/><br /><br />
 						<div
 							className="introduce-html"
-							dangerouslySetInnerHTML={{ __html: '文章简介：' + introducehtml }} >
+							dangerouslySetInnerHTML={{ __html: '文章简介：' + markdownContent }} >
 						</div>
 					</Col><br />
 					<Col span={12}>
