@@ -47,7 +47,7 @@ module.exports = appInfo => {
     csrf: {
       enable: false
     },
-    domainWhiteList: ['*']
+    domainWhiteList: ['http://localhost:9000']
   };
   config.cors = {
     origin: 'http://localhost:3000', // 设置跨域访问

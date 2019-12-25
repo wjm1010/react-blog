@@ -9,6 +9,7 @@ const Login = (props) => {
 	const [passWord, setPassWord] = useState('')
 	const [isLoading, setIsLoading] = useState(false)
 	const checkLogin = () => {
+		setIsLoading(true)
 		if (!userName) {
 			message.error('用户名不能为空')
 			return false
@@ -16,7 +17,6 @@ const Login = (props) => {
 			message.error('密码不能为空')
 			return false
 		}
-		setIsLoading(true)
 		let dataProps = {
 			'userName': userName,
 			'passWord': passWord
@@ -27,15 +27,18 @@ const Login = (props) => {
 			data: dataProps,
 			withCredentials: true
 		}).then(res => {
+			setIsLoading(false)
 			if (res.data.data === '登录成功') {
 				localStorage.setItem('openId', res.data.openId)
 				props.history.push('/index')
 			} else {
 				message.error('用户名密码错误')
 			}
-		}).finally(() => {
+		}).catch(() => { setIsLoading(false) })
+
+		setTimeout(() => {
 			setIsLoading(false)
-		})
+		}, 1000)
 	}
 	return (
 		<div className="login-div">
