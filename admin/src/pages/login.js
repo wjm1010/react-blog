@@ -9,7 +9,6 @@ const Login = (props) => {
 	const [passWord, setPassWord] = useState('')
 	const [isLoading, setIsLoading] = useState(false)
 	const checkLogin = () => {
-		setIsLoading(true)
 		if (!userName) {
 			message.error('用户名不能为空')
 			return false
@@ -21,6 +20,7 @@ const Login = (props) => {
 			'userName': userName,
 			'passWord': passWord
 		}
+		setIsLoading(true)
 		axios({
 			method: 'post',
 			url: Api.checkLogin,
@@ -35,10 +35,6 @@ const Login = (props) => {
 				message.error('用户名密码错误')
 			}
 		}).catch(() => { setIsLoading(false) })
-
-		setTimeout(() => {
-			setIsLoading(false)
-		}, 1000)
 	}
 	return (
 		<div className="login-div">
